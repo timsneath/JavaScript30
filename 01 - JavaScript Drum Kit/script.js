@@ -23,7 +23,9 @@ function keyDown (e) {
 
 function removePlayingTransition (e) {
   console.log(e.target)
-  e.target.classList.remove('playing')
+  if (e.propertyName === 'transform') {
+    e.target.classList.remove('playing')
+  }
 }
 
 window.addEventListener('load', windowLoaded)
