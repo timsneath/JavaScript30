@@ -1,73 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JS + CSS Clock</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
+
+<style>
+</style>
+
 <body>
-
-
-    <div class="clock">
-      <div class="clock-face">
-        <div class="hand hour-hand"></div>
-        <div class="hand min-hand"></div>
-        <div class="hand second-hand"></div>
-      </div>
+  <div class="clock">
+    <div class="clock-face">
+      <div class="hand hour-hand"></div>
+      <div class="hand min-hand"></div>
+      <div class="hand second-hand"></div>
     </div>
-
-
-  <style>
-    html {
-      background:#018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
-      background-size:cover;
-      font-family:'helvetica neue';
-      text-align: center;
-      font-size: 10px;
-    }
-
-    body {
-      font-size: 2rem;
-      display:flex;
-      flex:1;
-      min-height: 100vh;
-      align-items: center;
-    }
-
-    .clock {
-      width: 30rem;
-      height: 30rem;
-      border:20px solid white;
-      border-radius:50%;
-      margin:50px auto;
-      position: relative;
-      padding:2rem;
-      box-shadow:
-        0 0 0 4px rgba(0,0,0,0.1),
-        inset 0 0 0 3px #EFEFEF,
-        inset 0 0 10px black,
-        0 0 10px rgba(0,0,0,0.2);
-    }
-
-    .clock-face {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
-    }
-
-    .hand {
-      width:50%;
-      height:6px;
-      background:black;
-      position: absolute;
-      top:50%;
-    }
-
-  </style>
-
-  <script>
-
-
-  </script>
+  </div>
 </body>
+
+<script>
+  const hourHand = document.querySelector('.hour-hand')
+  const minuteHand = document.querySelector('.min-hand')
+  const secondHand = document.querySelector('.second-hand')
+
+  function setTime() {
+    const now = new Date()
+
+    const seconds = now.getSeconds()
+    const secondsAsDegrees = seconds * 6
+    secondHand.style.transform = `rotate(${secondsAsDegrees + 90}deg)`
+
+    const minutes = now.getMinutes()
+    const minutesAsDegrees = (minutes * 6) + (seconds / 6)
+    minuteHand.style.transform = `rotate(${minutesAsDegrees + 90}deg)`
+
+    const hours = now.getHours()
+    const hoursAsDegrees = (hours * 30) + (minutes / 6)
+    hourHand.style.transform = `rotate(${hoursAsDegrees + 90}deg)`
+  }
+
+  setInterval(setTime, 1000);
+</script>
+
 </html>
